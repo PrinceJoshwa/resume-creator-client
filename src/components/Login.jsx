@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ const LoginPage = () => {
           },
         });
         console.log("Google login successful:", res.data);
+        navigate("/templates");
         // TODO: Handle successful login (e.g., store user data, redirect)
       } catch (err) {
         console.error("Error fetching user info:", err);
