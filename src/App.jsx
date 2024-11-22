@@ -42,14 +42,14 @@
 
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "./LoginPage";
-import TemplatesPage from "./TemplatesPage"; // Example template page
+import LoginPage from "./components/Login";
+import Templates from "./pages/Templates"; // Example template page
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route path="/templates" element={<TemplatesPage />} />
+      <Route path="/templates" element={<Templates />} />
     </Routes>
   );
 };
