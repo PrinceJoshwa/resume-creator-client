@@ -40,16 +40,37 @@
 
 // export default App;
 
+////22-11-2024
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./components/Login";
-import Templates from "./pages/Templates"; // Example template page
+import Templates from "./pages/Templates";
+import Sidebar from "./components/Sidebar";
+
+const Layout = ({ children }) => {
+  const handleLogout = () => {
+    // TODO: Implement logout logic
+    console.log("Logout clicked");
+  };
+
+  return (
+    <div className="flex h-screen">
+      <Sidebar onLogout={handleLogout} />
+      <main className="flex-1 overflow-auto">
+        {children}
+      </main>
+    </div>
+  );
+};
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route path="/templates" element={<Templates />} />
+      <Route path="/templates" element={<Layout><Templates /></Layout>} />
+      <Route path="/dashboard" element={<Layout><div>Dashboard Content</div></Layout>} />
+      <Route path="/my-resumes" element={<Layout><div>My Resumes Content</div></Layout>} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
