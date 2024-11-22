@@ -31,11 +31,28 @@
 
 
 
+// import React from "react";
+// import LoginPage from "./components/Login";
+
+// const App = () => {
+//   return <LoginPage />;
+// };
+
+// export default App;
+
 import React from "react";
-import LoginPage from "./components/Login";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./LoginPage";
+import TemplatesPage from "./TemplatesPage"; // Example template page
 
 const App = () => {
-  return <LoginPage />;
+  return (
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/templates" element={<TemplatesPage />} />
+    </Routes>
+  );
 };
 
 export default App;
+
