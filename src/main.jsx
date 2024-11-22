@@ -14,23 +14,6 @@
 
 ////22-11-2024
 
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import { BrowserRouter } from "react-router-dom";
-// import App from "./App";
-// import "./index.css"
-// import { GoogleOAuthProvider } from "@react-oauth/google";
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-//         <App />
-//       </GoogleOAuthProvider>
-//     </BrowserRouter>
-//   </React.StrictMode>
-// );
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -38,22 +21,12 @@ import App from "./App";
 import "./index.css"
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-
-if (!googleClientId) {
-  console.error("Google Client ID is not set. Please check your environment variables.");
-}
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      {googleClientId ? (
-        <GoogleOAuthProvider clientId={googleClientId}>
-          <App />
-        </GoogleOAuthProvider>
-      ) : (
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <App />
-      )}
+      </GoogleOAuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
