@@ -41,17 +41,66 @@
 // export default App;
 
 ////22-11-2024
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "./components/Login"; // Updated import path
+// import React from "react";
+// import { Routes, Route, Navigate } from "react-router-dom";
+// import LoginPage from "./components/Login"; // Updated import path
+// import Templates from "./pages/Templates";
+// import Sidebar from "./components/Sidebar";
+
+// const Layout = ({ children }) => {
+//   const handleLogout = () => {
+//     // TODO: Implement logout logic
+//     console.log("Logout clicked");
+//   };
+
+//   return (
+//     <div className="flex h-screen">
+//       <Sidebar onLogout={handleLogout} />
+//       <main className="flex-1 overflow-auto">
+//         {children}
+//       </main>
+//     </div>
+//   );
+// };
+
+// const App = () => {
+//   return (
+//     <Routes>
+//       <Route path="/" element={<LoginPage />} />
+//       <Route path="/templates" element={<Layout><Templates /></Layout>} />
+//       <Route path="/dashboard" element={<Layout><div>Dashboard Content</div></Layout>} />
+//       {/* <Route path="/my-resumes" element={<Layout><div>My Resumes Content</div></Layout>} /> */}
+//       <Route path="*" element={<Navigate to="/" replace />} />
+//     </Routes>
+//   );
+// };
+
+// export default App;
+
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import LoginPage from "./components/Login"; 
 import Templates from "./pages/Templates";
 import Sidebar from "./components/Sidebar";
 
 const Layout = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogout = () => {
-    // TODO: Implement logout logic
-    console.log("Logout clicked");
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    window.location.href = '/';
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  if (!isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="flex h-screen">
@@ -65,15 +114,16 @@ const Layout = ({ children }) => {
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/templates" element={<Layout><Templates /></Layout>} />
-      <Route path="/dashboard" element={<Layout><div>Dashboard Content</div></Layout>} />
-      <Route path="/my-resumes" element={<Layout><div>My Resumes Content</div></Layout>} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/templates" element={<Layout><Templates /></Layout>} />
+        <Route path="/dashboard" element={<Layout><div>Dashboard Content</div></Layout>} />
+        <Route path="/my-resumes" element={<Layout><div>My Resumes Content</div></Layout>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
 export default App;
-

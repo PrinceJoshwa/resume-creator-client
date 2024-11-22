@@ -12,6 +12,24 @@
 //   </React.StrictMode>
 // );
 
+
+// import React from "react";
+// import ReactDOM from "react-dom/client";
+// import { BrowserRouter } from "react-router-dom";
+// import App from "./App";
+// import "./index.css"
+// import { GoogleOAuthProvider } from "@react-oauth/google";
+
+// ReactDOM.createRoot(document.getElementById("root")).render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+//         <App />
+//       </GoogleOAuthProvider>
+//     </BrowserRouter>
+//   </React.StrictMode>
+// );
+
 ////22-11-2024
 
 import React from "react";
@@ -21,7 +39,10 @@ import App from "./App";
 import "./index.css"
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Failed to find the root element");
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
@@ -30,4 +51,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
