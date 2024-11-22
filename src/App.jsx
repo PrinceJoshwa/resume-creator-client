@@ -43,7 +43,7 @@
 ////22-11-2024
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "./components/Login";
+import LoginPage from "./components/Login"; // Updated import path
 import Templates from "./pages/Templates";
 import Sidebar from "./components/Sidebar";
 
