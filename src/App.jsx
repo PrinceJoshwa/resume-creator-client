@@ -77,30 +77,18 @@
 
 // export default App;
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import LoginPage from "./components/Login"; 
 import Templates from "./pages/Templates";
 import Sidebar from "./components/Sidebar";
 
 const Layout = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogout = () => {
+    // Implement logout logic
     localStorage.removeItem('token');
-    setIsLoggedIn(false);
     window.location.href = '/';
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  if (!isLoggedIn) {
-    return <Navigate to="/" replace />;
-  }
 
   return (
     <div className="flex h-screen">
